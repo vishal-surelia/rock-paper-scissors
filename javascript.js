@@ -55,6 +55,9 @@ for(let i = 0; i < 5; i++){
         win = 6;
         break;
     }
+
+    console.log(`Round ${i+1}: player score:${playerScore} | computer score:${computerScore}`)
+    console.log("______________________________________________")
 }
 
 if(win === 6){
@@ -64,7 +67,7 @@ else{
     
     if(playerScore > computerScore)
     {
-        console.log("You Win")
+        console.log("You Win!")
     }
     if(playerScore < computerScore)
     {
