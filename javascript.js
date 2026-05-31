@@ -1,3 +1,14 @@
+const btnList = document.querySelectorAll('button');
+const playBtn = document.querySelector("#playbtn");
+const container = document.querySelector("#container");
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+const resultCont = document.querySelector("#resultcont");
+const scoreCont = document.querySelector("#scorecont");
+const verdictCont = document.querySelector("#verditcont");
+
+
 // function for computer choice
 function getComputerChoice(){
     return Math.floor(Math.random()*3);
@@ -5,16 +16,15 @@ function getComputerChoice(){
 
 
 // function for player choice
-function getPlayerChoice(){
-    let playerChoice = prompt("Choose between Rock(0), Paper(1), scissors(2)")
-
-    if(playerChoice === "rock" || playerChoice === "Rock" || playerChoice === "ROCK" || playerChoice === "0"){
+function getPlayerChoice(playerChoice){
+   
+    if(playerChoice === "rock"){
         return 0;
     }
-    if(playerChoice === "paper" || playerChoice === "Paper" || playerChoice === "PAPER" || playerChoice ==="1"){
+    else if(playerChoice === "paper"){
         return 1;
     }
-    if(playerChoice === "scissors" || playerChoice === "Scissors" || playerChoice === "SCISSORS" || playerChoice === "2"){
+    else if(playerChoice === "scissors"){
         return 2;
     }
 }
@@ -34,48 +44,79 @@ function result(computer, player){
 }
 
 // start game 
-let playerScore = 0;
-let computerScore = 0;
-let win = 0;
-for(let i = 0; i < 5; i++){
 
-    win = result(getComputerChoice(), getPlayerChoice());
+function startGame(playerChoice){
+    let playerScore = 0;
+    let computerScore = 0;
+    let win = 0;
+    
+    win = result(getComputerChoice(), getPlayerChoice(playerChoice));
     
     if(win == 0){
         computerScore++;
-    }
+        }
     else if(win == 1){
         playerScore++;
     }
-    else if(win == 10){
+    else if(win == 10){ 
         playerScore++;
         computerScore++;
-    }
+    }   
     else{
         win = 6;
-        break;
     }
 
-    console.log(`Round ${i+1}: player score:${playerScore} | computer score:${computerScore}`)
+    console.log(`Round 1: player score:${playerScore} | computer score:${computerScore}`);
+    scoreCont.textContent = `Round 1: player score:${playerScore} | computer score:${computerScore}`;
     console.log("______________________________________________")
+
+    if(win === 6){
+    console.log("Reload the site");
+    }
+    else{
+    
+        if(playerScore > computerScore)
+        {
+            verdictCont.textContent = `You Win!`;
+            console.log("You Win!")
+        }
+        else if(playerScore < computerScore)
+        {
+            verdictCont.textContent = `You Lose`;
+            console.log("You Lose")
+        }
+        else if(playerScore == computerScore)
+        {   
+            verdictCont.textContent = `Tie`;
+            console.log("Tie")
+        }
+    }
+}
+//UI
+
+btnList.forEach(bt => {
+    bt.addEventListener("mouseover", () => {bt.style.backgroundColor = "blue"});
+    bt.addEventListener("mouseout", () => {bt.style.backgroundColor = "black"});
+})
+
+
+container.style.display = "none";
+
+//making the button appear and start of game
+function start(){
+
+    container.style.display = "block";
+    rock.addEventListener("click", () => startGame("rock"));
+    paper.addEventListener("click", () => startGame("paper"));
+    scissors.addEventListener("click", () => startGame("scissors"));
+
+    
 }
 
-if(win === 6){
-   console.log("Reload the site");
-}
-else{
-    
-    if(playerScore > computerScore)
-    {
-        console.log("You Win!")
-    }
-    if(playerScore < computerScore)
-    {
-        console.log("You Lose")
-    }
-    if(playerScore == computerScore)
-    {
-        console.log("Tie")
-    }
-}
+
+
+
+playBtn.addEventListener("click", start);
+
+
 

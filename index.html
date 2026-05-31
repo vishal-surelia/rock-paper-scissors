@@ -4,16 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock-Paper-Scissors</title>
-    <script src="javascript.js"></script>
-    <style>*{background-color: black; color: white;}</style>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
-    <h1>Open console</h1>
-    <h1>Choose between Rock(0), Paper(1), scissors(2)</h1>
-    <h1>Tie get 1 point to both computer and player</h1>
-    <h1>Most point at end of 5 round win</h1>
-    <h1>Got stuck or want to play again reload the site</h>
+    <h1>Rock Paper scissors</h1>
+    <h2>Rules</h2>
+    <ul>
+        <li>Tie get 1 point to both computer and player</li>
+        <li>Most point at end of 5 round win</li>
+        <li>Got stuck or want to play again reload the site</li>
+    </ul>
+
+    <button id="playbtn">Play</button>
+
+    <div id="container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+    </div>
+    <div id="resultcont">
+        <h3 id="verdictcont"></h3>
+        <h3 id="scorecont"></h3>
+    </div>
     
 </body>
 </html>
