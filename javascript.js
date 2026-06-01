@@ -1,13 +1,17 @@
 const btnList = document.querySelectorAll('button');
 const playBtn = document.querySelector("#playbtn");
+const restartBtn = document.querySelector("#restartbtn");
 const container = document.querySelector("#container");
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
-const resultCont = document.querySelector("#resultcont");
 const scoreCont = document.querySelector("#scorecont");
-const verdictCont = document.querySelector("#verditcont");
+const verdictCont = document.querySelector("#verdictcont");
 
+
+let playerScore = 0;
+let computerScore = 0;
+let round = 0;
 
 // function for computer choice
 function getComputerChoice(){
@@ -46,51 +50,55 @@ function result(computer, player){
 // start game 
 
 function startGame(playerChoice){
-    let playerScore = 0;
-    let computerScore = 0;
+    
     let win = 0;
+    verdictCont.textContent = "";
     
     win = result(getComputerChoice(), getPlayerChoice(playerChoice));
     
     if(win == 0){
-        computerScore++;
-        }
+    computerScore++;
+    }
     else if(win == 1){
         playerScore++;
     }
     else if(win == 10){ 
         playerScore++;
         computerScore++;
-    }   
-    else{
-        win = 6;
     }
 
-    console.log(`Round 1: player score:${playerScore} | computer score:${computerScore}`);
-    scoreCont.textContent = `Round 1: player score:${playerScore} | computer score:${computerScore}`;
-    console.log("______________________________________________")
-
-    if(win === 6){
-    console.log("Reload the site");
-    }
-    else{
+    ++round;
+    scoreCont.textContent = `Round ${round}: player score:${playerScore} | computer score:${computerScore}`;
     
+
+    
+    if(round === 5){
         if(playerScore > computerScore)
         {
-            verdictCont.textContent = `You Win!`;
-            console.log("You Win!")
+            verdictCont.textContent = `Congratulation You Win!`;
+            round = 0;
+            playerScore = 0;
+            computerScore = 0;
+            
         }
         else if(playerScore < computerScore)
-        {
-            verdictCont.textContent = `You Lose`;
-            console.log("You Lose")
-        }
+        {   
+            verdictCont.textContent = `You Lose!`;
+            round = 0;
+            playerScore = 0;
+            computerScore = 0;
+        
+        }   
         else if(playerScore == computerScore)
         {   
-            verdictCont.textContent = `Tie`;
-            console.log("Tie")
+            verdictCont.textContent = `Tie!`;
+            round = 0;
+            playerScore = 0;
+            computerScore = 0;
+            
         }
     }
+
 }
 //UI
 
@@ -100,23 +108,31 @@ btnList.forEach(bt => {
 })
 
 
+playBtn.style.display = "block"
 container.style.display = "none";
 
 //making the button appear and start of game
 function start(){
-
+    round = 0;
+    playerScore = 0;
+    computerScore = 0;
     container.style.display = "block";
     rock.addEventListener("click", () => startGame("rock"));
     paper.addEventListener("click", () => startGame("paper"));
     scissors.addEventListener("click", () => startGame("scissors"));
-
-    
+    playBtn.style.display = "none"
+    container.style.display= "flex";
+    container.style.justifyContent= "center";
+    container.style.gap= "10px";
 }
 
-
-
-
 playBtn.addEventListener("click", start);
+restartBtn.addEventListener("click", () => {
+    round = 0;
+    playerScore = 0;
+    computerScore = 0;
+    verdictCont.textContent = "";
+    scoreCont.textContent = "";});
 
 
 

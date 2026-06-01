@@ -1,13 +1,44 @@
 body{
-    background-color: black;
+    background-image:  url("img/5580240.jpg");
     color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 button{
     border: 1px dashed white;
     background-color: black;
     color: white;
+    width: 100px;
+    height: 30px;
 }
+
+.title{
+    font-size: 32px;
+    font-weight: 900;
+    text-align: center;
+    color: rgb(59, 73, 236);
+}
+
+.unit{
+    display: flex;
+    justify-content: center;
+    gap: 10px
+}
+
+.rules{
+    color: red;
+}
+
+.option{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
 h3{
-    color: yellowgreen;
+    color: rgb(234, 255, 0);
     font-size: 50px;
+    text-align: center;
 }
